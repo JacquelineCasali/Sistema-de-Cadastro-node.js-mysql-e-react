@@ -29,10 +29,10 @@ https://github.com/JacquelineCasali/Api-Login-Node-express-Mysql.git
 
 ## Projeto
 - Logar no sistema
-- Cria Repositorio e usuarios no banco de dados
-- Ler Repositorio e usuarios no banco de dados
-- Atualizar Repositorio e usuarios no banco de dados
-- Excluir Repositorio no banco de dados
+- Cria cliente e contatos no banco de dados
+- Ler cliente e contatos no banco de dados
+- Atualizar cliente e contatos no banco de dados
+- Excluir cliente e contatos no banco de dados
 - Clique no cartão para editar e excluir
 
 ## Bibliotecas Usadas

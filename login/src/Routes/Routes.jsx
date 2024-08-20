@@ -12,6 +12,7 @@ import Repos from "../pages/Repos";
 import CadastroLogin from "../pages/CadastroLogin";
 
 import Editar from "../pages/Editar";
+import DownloadPDF from "../pages/DownloadPDF";
 
 const AppRoutes = ({ onLogout }) => {
   //rotas privadas
@@ -36,9 +37,19 @@ const AppRoutes = ({ onLogout }) => {
 
         <Container>
           <Routes>
-            <Route
+          
+          <Route
               exact
               path="/"
+              element={
+               
+                  <DownloadPDF />
+                  }
+            />
+          
+            <Route
+              exact
+              path="/T"
               element={
                 <Private>
                   <Home />

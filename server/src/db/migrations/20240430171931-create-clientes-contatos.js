@@ -2,29 +2,29 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users_Repositorios', {
+    await queryInterface.createTable('cliente_contatos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId:{
+      clienteId:{
         type:Sequelize.INTEGER  ,
         allowNull: false,
         references:{
-          model:'Users',
+          model:'Clientes',
           key:'id'
         },
         onUpdate:'CASCADE',
         onDelete:'CASCADE',
     
         },
-      repositorioId: {
+      contatoId: {
         type:Sequelize.INTEGER  ,
         allowNull: false,
         references:{
-          model:'Repositorios',
+          model:'Contatos',
           key:'id'
         },
         onUpdate:'CASCADE',
@@ -42,6 +42,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users_Repositorios');
+    await queryInterface.dropTable('cliente_contatos');
   }
 };

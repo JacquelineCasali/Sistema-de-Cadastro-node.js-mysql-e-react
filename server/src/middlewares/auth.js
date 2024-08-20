@@ -1,6 +1,6 @@
  const jwt= require('jsonwebtoken')
  const authConfig=require('../db/config/auth')
- const promisify=require('util')
+
  //const SECRET='123'
 
  const auth=async(req,res,next)=>{

@@ -1,5 +1,4 @@
 import { FaUser, FaLock } from "react-icons/fa";
-//import "./Cadastro.css";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, Checkbox, Formulario, TelaLogin } from "./styles";

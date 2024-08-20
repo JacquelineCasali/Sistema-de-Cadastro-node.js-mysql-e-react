@@ -10,7 +10,7 @@ const loginController = {
   //cadastrar
   async login(req, res) {
     const { email, password } = req.body;
-    const users = await db.Users.findOne({ where: { email } });
+    const users = await db.Clientes.findOne({ where: { email } });
 
     if (!users) {
       return res.status(422).json({message: `Email ${email} não encontrado` });
@@ -23,16 +23,13 @@ const loginController = {
     //resgatando o id do usuario
     const{id}=users;
     //expiresIn:300 expira em 5 minutos
+    //expiresIn:7d expira em 7 
   const token= jwt.sign({id},authConfig.secret,{expiresIn:"7d"})
 
   res.cookie('token',token)
 
      return res.json({
       auth:true,
-      // message: 'logado com sucesso',
-      users:{
-         id,email
-       },
       token,
       message:'Logado com sucesso'
      }

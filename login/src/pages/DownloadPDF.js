@@ -1,10 +1,8 @@
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async"; // titulo da pagina
-import Card from "../components/MainPage/index";
 
 
-export default function Home() {
-
+export default function DownloadPDF() {
   return (
   
    
@@ -14,11 +12,16 @@ export default function Home() {
       </HelmetProvider>
 
 {/* <Hearder/> */}
-    <Card/>
+{/* <Link href='/Video_login.gif' download={"Video_login.gif"}>
+Download
+</Link> */}
+<button >
+<a href="images/Video_login.gif" download={"Video_login.gif"}>Download</a> 
 
 
+</button>
 
-   </>
+ </>
    
     
 

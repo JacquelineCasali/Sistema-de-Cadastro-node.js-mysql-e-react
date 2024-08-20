@@ -2,13 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Clientes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique:true,
+        validate:{
+          notEmpty:{
+            msg:"Esse campo não pode ser vazio"
+          },
+        }  
+    },
+    
+
       email: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -29,6 +42,17 @@ module.exports = {
           },
         }  
     },
+        telefone: {
+        type: Sequelize.STRING,
+       
+        unique:true,
+        allowNull: false,
+        validate:{
+          notEmpty:{
+            msg:"Esse campo precissa ser um telefone valido"
+          },
+        }  
+    },
     
       createdAt: {
         allowNull: false,
@@ -41,6 +65,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Clientes');
   }
 };

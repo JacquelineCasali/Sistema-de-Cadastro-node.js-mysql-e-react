@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Repositorios extends Model {
+  class Contatos extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,45 +12,55 @@ module.exports = (sequelize, DataTypes) => {
       //CASCADE login deletado todos repositorios deletado
       //as nomeando o relacinamento eu escolho o nome do as 
       //through nome que vai relacionar loja com produtos (nome das tabelas com id)
-      this.belongsToMany(models.Users,{
-        foreignKey:'repositorioId',
-        through:'Users_Repositorios',
+      this.belongsToMany(models.Clientes,{
+        foreignKey:'contatoId',
+        through:'cliente_contatos',
            as:'login',
       onUpdate:'CASCADE',
       onDelete:'CASCADE'})
     }
   }
-  Repositorios.init(
+  Contatos.init(
     {
         name: {
         type: DataTypes.STRING,
         // unique:true,
-        // allowNull: false,
-        // validate: {
-        //   notEmpty: {
-        //     msg: "Esse campo não pode ser vazio",
-        //   },
-        // },
-      },
-      url: {
-        type: DataTypes.STRING,
-           allowNull: false,
-           unique:true,
+        allowNull: false,
         validate: {
-          isUrl: {
-            msg: "Esse campo não é url",
+          notEmpty: {
+            msg: "Esse campo não pode ser vazio",
           },
         },
       },
+      email: {
+        type:DataTypes.STRING,
+        allowNull: false,
+        validate:{
+       isEmail:{
+            msg:"Esse campo precisa ser um e-mail"
+           }
+        },
+        // unique:true,
+      },
+  
+      telefone: {
+        type: DataTypes.STRING,
+        // unique:true,
+        allowNull: false,
+        validate:{
+          notEmpty:{
+            msg:"Esse campo precissa ser um telefone valido"
+          },
+        }  
+    },
 
-      // required:true,
     },
 
     {
       sequelize,
-      modelName: "Repositorios",
+      modelName: "Contatos",
     }
   );
 
-  return Repositorios;
+  return Contatos;
 };

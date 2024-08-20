@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Users extends Model {
+  class Clientes extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
 
-      this.belongsToMany(models.Repositorios,{
-        foreignKey:'userId',
-        through:'Users_Repositorios',
-           as:'repositorio',
+      this.belongsToMany(models.Contatos,{
+        foreignKey:'clienteId',
+        through:'cliente_contatos',
+           as:'contato',
       onUpdate:'CASCADE',
       onDelete:'CASCADE'})
 
@@ -26,8 +26,21 @@ module.exports = (sequelize, DataTypes) => {
 
     
   
-  Users.init({
-       email: {
+    Clientes.init({
+      
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique:true,
+        validate:{
+          notEmpty:{
+            msg:"Esse campo não pode ser vazio"
+          },
+        }  
+    },
+      
+      
+      email: {
       type:DataTypes.STRING,
       allowNull: false,
       validate:{
@@ -48,10 +61,24 @@ module.exports = (sequelize, DataTypes) => {
         msg:"Esse campo não pode ser vazio"
       },
     }
-    } 
+    } ,
+
+    telefone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      
+      validate:{
+        notEmpty:{
+          msg:"Esse campo precissa ser um telefone valido"
+        },
+            }, 
+      unique:true, 
+  },
+
+
   }, {
     sequelize,
-    modelName: 'Users',
+    modelName: 'Clientes',
   });
-  return Users;
+  return Clientes;
 };
