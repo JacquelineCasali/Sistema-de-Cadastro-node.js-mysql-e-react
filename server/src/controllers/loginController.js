@@ -1,8 +1,8 @@
 const db = require("../db/models");
 const bcrypt = require("../services/auth");
 const jwt= require('jsonwebtoken')
-const authConfig=require('../db/config/auth')
-//const SECRET='123'
+
+
 const loginController = {
 
   
@@ -24,7 +24,9 @@ const loginController = {
     const{id}=users;
     //expiresIn:300 expira em 5 minutos
     //expiresIn:7d expira em 7 
-  const token= jwt.sign({id},authConfig.secret,{expiresIn:"7d"})
+  // const token= jwt.sign({id},authConfig.secret,{expiresIn:"300"})
+
+  const token= jwt.sign({id},process.env.SECRET,{expiresIn:"300"})
 
   res.cookie('token',token)
 
@@ -32,13 +34,15 @@ const loginController = {
       auth:true,
       token,
       message:'Logado com sucesso'
-     }
-      
-     );
-  
+     });
+
   },
 
+  async logout(req, res) {
 
+ 
 
+    res.json({auth:false, token:null,  message:'Deslogado  com sucesso'})
+  }
 };
 module.exports = loginController;

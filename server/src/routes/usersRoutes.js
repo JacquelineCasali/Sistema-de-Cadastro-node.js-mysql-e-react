@@ -21,9 +21,9 @@ router.get('/repo',contatosControllers.listar)
  //controler privado 
 // daqui para baixo sistema de autenticação
  //proteção torna as rotas privadas apartir daqui
-router.use(auth);
+// router.use(auth);
 
-
+router.post('/logout',loginController.logout);
 router.get("/cliente/:id", clientesControllers.ler);
 router.put('/cliente/:id',clientesControllers.update)
 router.delete("/cliente/:id",clientesControllers.delete);
