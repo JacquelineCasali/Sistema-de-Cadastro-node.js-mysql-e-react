@@ -1,36 +1,31 @@
-.container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    /* width: 100vw; */
-  padding: 0;
-    
+.lado-lista{
+  width: 85%;
+  float: none;
+/* margin-left: 20px; */
+display: flex;
+flex-direction: column;
+align-items: center;
+
 }
+
 
 .busca{
-width: 90%;
-
-padding-top: 76px;
+width: 80%;
+padding-top: 46px;
 }
 
 
-
-
-  .titulo-cliente{
-    color: #000;
-
-    line-height: 40px;
-    font-size:36px;
-    display: flex;
-    justify-content: center;
-
-  }
-
-  /* .h2{
-    margin:   0 0  5px 0;
-
-  } */
+.clientes{
+  color: #102133;
+    border-bottom: 2px solid #d9d9d9;
+    position: relative;
+    box-sizing: border-box;
+    list-style: none;
+ width: 100%;
+      margin-bottom: 23px;
+      font-size: 22px;
+      font-weight: 700;
+}
 
   .pesquisa{
     width: 90%;
@@ -60,7 +55,7 @@ padding-top: 76px;
  
 .card-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 16px;
     padding: 30px;
 }
@@ -90,8 +85,10 @@ padding-top: 76px;
     border-radius: 20px;
   font-size: 18px;
 
- margin-left: 1000px;
+ margin-left: 450px;
   text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
   
  /* a:link {

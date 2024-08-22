@@ -15,7 +15,7 @@
   font-size:36px;
   display: flex;
   justify-content: center;
-padding-top: 16px;
+/* padding-top: 16px; */
 font-family: sans-serif;
 margin-bottom: 20px;
 }
@@ -29,10 +29,10 @@ flex-direction: column;
   }
   
 .formulario{
-  margin-top: 8px;
+  /* margin-top: 8px; */
   background-color: #fff;
-  border-radius: 6px;
-  padding: 30px;
+  border-radius: 16px;
+  padding:  25px 30px  20px 30px; 
   gap: 40px;
 line-height: 24px;
 
@@ -55,7 +55,7 @@ opacity: 0.8;
 .form-nome{
   padding: 12px;
 margin-top: 16px;
-margin-bottom: 16px;
+/* margin-bottom: 16px; */
 
 color:rgb(17, 24, 39) ;
 background-color:rgb(243 244 246) ;

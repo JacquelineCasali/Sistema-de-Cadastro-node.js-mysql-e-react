@@ -3,20 +3,28 @@ import axios from "axios";
 import { Link, useNavigate ,useParams} from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async"; // titulo da pagina
 import "./Editar.css"
-import BotaoVoltar from "../../Voltar/BotaoVoltar";
+
 import { api } from "../../../db/axios";
 import Hearder from "../../Hearder/Hearder";
 import Footer from "../../Footer/Footer";
 
 
+import { ImExit } from "react-icons/im";
+
+
+import * as Icon from "react-bootstrap-icons";
+
+import { IoPersonAddOutline } from "react-icons/io5";
+import { FaRegAddressCard } from "react-icons/fa6";
+
+
+
 export default function Editar() {
+
+  
+  
   const { id } = useParams();
- 
- 
- 
- 
- 
-  useEffect(() => {
+   useEffect(() => {
     // puxando dados do banco
     //  banco de dados
     axios
@@ -67,26 +75,20 @@ export default function Editar() {
       </HelmetProvider>
     <Hearder/>
    
+
+
+
+
 {/* lado direito  */}
-<section>
-{/* <!-- aside parte do menu - minha conta até sair --> */}
-    <div class="menu">
-        {/* <!-- para formatar minha conta --> */}
-    {/* <section class="perfil">
+<section className="menu">
 
-    <a href="#" class="mobile-menu1"> MINHA CONTA</a>
-   
-   <div class="mobile-menu">
-      <div class="line 1"></div>
-      <div class="line 2"></div>
-      <div class="line 3"></div>
-  </div>  
+<aside className="lado-esquerdo">
 
-    </section> */}
-
-<nav>
-  <ul>
+<nav  >
+  <ul className="ul">
   <h3>MEUS DADOS</h3>
+ <div className='dados'>
+ 
   <div className="card-item">
 <p className="tes">
 Nome:
@@ -105,80 +107,204 @@ Nome:
 <p className="tes">Telefone:</p>
 
   <p > {values.telefone}</p>
-    </div>    
- <Link to={`/edit/${id}`}>Editar</Link>
+    </div> 
  
- <h3>Clientes</h3> 
+ </div>
+    
+    <h3 >Clientes</h3>   
+ 
+ 
+
+  
+
+
+
     <li>
-Cadastrar Cliente
-    </li>
-    <li>Todos os Clientes</li>
- <li>Editar Cliente</li>
- <li>Sair</li>
+    <Link to={`/${values.id}`}>
+                        <FaRegAddressCard 
+                          color="black"
+                          size={30}
+                          cursor="pointer"
+                          className="icones"
+                        />
+                         Detalhe
+                      </Link>
+      
+     </li>
+
+ <li>
+
+
+ <Link to={`/edit/${values.id}`}>
+                        <Icon.Pencil
+                          color="black"
+                          size={30}
+                          cursor="pointer"
+                          className="icones"
+                        /> Editar
+                      </Link>
+
+
+ </li>
+ <li>
+ <Link onClick={() => handleDelete(values.id)}>
+                        <Icon.Trash3
+                          color="black"
+                          size={30}
+                          cursor="pointer"
+                          
+                          className="icones"
+                        /> Deletar 
+                      </Link>
+  
+  
+ </li>
+
  
+
+ <h3>Contatos</h3> 
+ 
+ <li>
+ <Link to={`/${values.id}`}>
+                        <IoPersonAddOutline
+                          color="black"
+                          size={30}
+                          cursor="pointer"
+                          className="icones"
+                        />
+                          Cadastrar </Link>
+
+  
+ </li>
+ 
+ <li>
+ <Link to={`/${values.id}`}>
+                        <FaRegAddressCard
+                          color="black"
+                          size={30}
+                          cursor="pointer"
+                          className="icones"
+                        />
+                         Detalhe </Link>
+  </li>
+
+<li>
+<Link to={`/edit/${values.id}`}>
+                        <Icon.Pencil
+                          color="black"
+                          size={30}
+                          cursor="pointer"
+                          className="icones"
+                        /> Editar 
+                      </Link>
+</li>
+<li>
+<Link onClick={() => handleDelete(values.id)}>
+                        <Icon.Trash3
+                          color="black"
+                          size={30}
+                          cursor="pointer"
+                          
+                          className="icones"
+                        /> Deletar </Link>
+  
+  
+ </li>
+
+
+
+ <li>
+  
+ <Link onClick={() => handleDelete(values.id)}>
+                        <ImExit
+                          color="black"
+                          size={30}
+                          cursor="pointer"
+                          
+                          className="icones"
+                        /> Sair
+                      </Link>
+
+
+  
+
+  </li>
+ <p > Data da Criação do Cliente{values.createdAt}</p> 
   </ul>
 </nav>
 
-   </div>
+
+</aside>
+
+ 
 
 
-<section className="lado-esquerdo">
+
+
+<main className="lado-direito">
 
 
       <div className="edite" >
       {/* <div className="titulo-edite">Sitema de Contatos</div> */}
-   
+      <h3 >Editar Clientes</h3> 
           
-     
-        <form onSubmit={handleUpdate} className="form">
-        <div className="formulario-edite">
-        <p className="titulo-p">Editar Membros</p>    
-<div >
+     </div>
+        <form onSubmit={handleUpdate} >
+      
+        {/* <div className="formulario-edite"> */}
+<div className="formularios">
+
+
 <label htmlFor=""className="test">Nome:</label>
 
 <input
-  className="form-edite"
+  className="form-control"
   type="text"
   placeholder="Digite o nome"
   value={values.name}
   onChange={(e) => setValues({ ...values, name: e.target.value })}
 
 />
-</div>
-     
-         
-<div>
-            <label htmlFor=""className="test">Email:</label>
+</div>   
+   <div className="formularios">
+   <label htmlFor=""className="test">Email:</label>
 
-            <input
-              className="form-edite"
-              type="email"
-              placeholder="Digite o Email"
-              value={values.email}
-              onChange={(e) => setValues({ ...values, email: e.target.value })}
+<input
+  className="form-control"
+  type="email"
+  placeholder="Digite o Email"
+  value={values.email}
+  onChange={(e) => setValues({ ...values, email: e.target.value })}
+
+/>
+
+    </div>      
            
-           />
-    </div>   
-    <div>
-            <label htmlFor="" className="test">Telefone:</label>
+           
+           <div className="formularios">
+
+         
+                        <label htmlFor="" className="test">Telefone:</label>
 
             <input
-              className="form-edite"
+              className="form-control"
               type="text"
               placeholder="Digite o Telefone"
               value={values.telefone}
               onChange={(e) => setValues({ ...values, telefone: e.target.value })}
           
            />
-        </div>      
+  </div>
+
           <button className="btn-editar">Editar</button>
-          </div>
+       {/* </div> */}
         </form>
-        </div>
+      
        
-        </section>
         
 
+  
+    </main>
     </section>
     <Footer/>
     </>

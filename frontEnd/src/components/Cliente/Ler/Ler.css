@@ -1,28 +1,11 @@
-.container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    /* width: 100vw; */
-  
-    
+.lado-direitos{
+  width: 100%;
+  float: none;
+margin-left: 20px;
+display: flex;
+flex-direction: column;
+
 }
-
-.tituloler{
-    display: inline-block;
-    padding: 30px  0 ;
-  }
-  /* .h2{
-    margin:   0 0  5px 0;
-   
-  } */
-
-  
-  /* a:link {
-    text-decoration: none;
-    color: unset
-  } */
-
  
 
 .card {
@@ -35,7 +18,11 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 20px;
 }
+.card-ler{
+  display: flex;
 
+    justify-content: center;
+}
 .tes{
   font-weight: bold;
   margin: 0 10px 10px 0 ;
