@@ -4,7 +4,7 @@ import { Link, useNavigate ,useParams} from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async"; // titulo da pagina
 import "./Editar.css"
 
-import { api } from "../../../db/axios";
+import { api, editarUsuario, getUsuario } from "../../../services/api";
 import Hearder from "../../Hearder/Hearder";
 import Footer from "../../Footer/Footer";
 
@@ -22,13 +22,14 @@ import { FaRegAddressCard } from "react-icons/fa6";
 export default function Editar() {
 
   
+
   
   const { id } = useParams();
    useEffect(() => {
     // puxando dados do banco
     //  banco de dados
     axios
-      .get(api+"/cliente/" + id)
+      .get(api+"/user/" + id)
       .then((res) => {
         console.log(res);
 
@@ -52,7 +53,7 @@ export default function Editar() {
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(api+"/cliente/" + id, values)
+      .put(api+"/user/" + id, values)
       .then((res) => {
         console.log(res);
         navigate("/");
@@ -67,6 +68,18 @@ export default function Editar() {
   
     };
 
+
+
+
+
+    const handleDelete = (id) => {
+      axios
+        .delete("http://localhost:3001/user/" + id)
+        .then((res) => {
+          // location.reload();
+        })
+        .catch((err) => console.log(err));
+    };
   return (
   <>        
   
@@ -249,6 +262,9 @@ Nome:
       <h3 >Editar Clientes</h3> 
           
      </div>
+
+    
+
         <form onSubmit={handleUpdate} >
       
         {/* <div className="formulario-edite"> */}

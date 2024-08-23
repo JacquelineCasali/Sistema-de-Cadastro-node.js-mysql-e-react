@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { api } from "../../../db/axios";
+
 import "./Ler.css";
 
 import { Helmet, HelmetProvider } from "react-helmet-async"; // titulo da pagina
@@ -14,13 +14,17 @@ import * as Icon from "react-bootstrap-icons";
 
 import { IoPersonAddOutline } from "react-icons/io5";
 import { FaRegAddressCard } from "react-icons/fa6";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/auth";
 function Ler() {
+ 
+  const {user} = useContext(AuthContext)
   const { id } = useParams();
   const [clientes, setClientes] = useState([]);
   useEffect(() => {
     //  banco de dados
     axios
-      .get(api + "/cliente/" + id)
+      .get(`http://localhost:3001/user/${user?.id}/repositorio/`+id)
       .then((res) => {
         console.log(res);
 
@@ -50,20 +54,22 @@ function Ler() {
 <p className="tes">
 Nome:
 </p>
-<p > {clientes.name}</p>
+<p > {user?.name}
+  
+  </p>
 
 </div>
 
 <div className="card-item">
 <p className="tes">Email:</p>
 
-  <p > {clientes.email}</p>
+  <p > {user?.email}</p>
     </div>  
 
         <div className="card-item">
 <p className="tes">Telefone:</p>
 
-  <p > {clientes.telefone}</p>
+  <p > {user?.telefone}</p>
     </div> 
  
  </div>
@@ -77,7 +83,7 @@ Nome:
 
 
     <li>
-    <Link to={`/${clientes.id}`}>
+    <Link to={`/${id}`}>
                         <FaRegAddressCard 
                           color="black"
                           size={30}
@@ -92,7 +98,9 @@ Nome:
  <li>
 
 
- <Link to={`/edit/${clientes.id}`}>
+ <Link to={`/edit/${clientes.id}/contato/${id}`}>
+
+ 
                         <Icon.Pencil
                           color="black"
                           size={30}
@@ -103,7 +111,7 @@ Nome:
 
 
  </li>
- <li>
+ {/* <li>
  <Link onClick={() => handleDelete(clientes.id)}>
                         <Icon.Trash3
                           color="black"
@@ -115,7 +123,7 @@ Nome:
                       </Link>
   
   
- </li>
+ </li> */}
 
  
 
@@ -146,7 +154,9 @@ Nome:
   </li>
 
 <li>
-<Link to={`/edit/${clientes.id}`}>
+<Link to={`/edit/${clientes.id}/contato/${id}`}>
+
+
                         <Icon.Pencil
                           color="black"
                           size={30}
@@ -155,7 +165,7 @@ Nome:
                         /> Editar 
                       </Link>
 </li>
-<li>
+{/* <li>
 <Link onClick={() => handleDelete(clientes.id)}>
                         <Icon.Trash3
                           color="black"
@@ -166,13 +176,13 @@ Nome:
                         /> Deletar </Link>
   
   
- </li>
+ </li> */}
 
 
 
  <li>
   
- <Link onClick={() => handleDelete(clientes.id)}>
+ {/* <Link onClick={() => handleDelete(clientes.id)}>
                         <ImExit
                           color="black"
                           size={30}
@@ -180,7 +190,7 @@ Nome:
                           
                           className="icones"
                         /> Sair
-                      </Link>
+                      </Link> */}
 
 
   
@@ -208,19 +218,19 @@ Nome:
 <p className="tes">
 Nome:
 </p>
-<p > {clientes.name}</p>
+<p > {clientes.nome}</p>
 
 </div>
 
 <div className="card-item">
 <p className="tes">Email:</p>
 
-  <p > {clientes.email}</p>
+  <p > {clientes.emails}</p>
     </div>       
     <div className="card-item">
 <p className="tes">Telefone:</p>
 
-  <p > {clientes.telefone}</p>
+  <p > {clientes.telefones}</p>
     </div>        
           
          
@@ -230,7 +240,9 @@ Nome:
           Voltar
         </Link>
 
-        <Link to={`/edit/${clientes.id}`} className="btn btn-info">
+        <Link to={   `/edit/${clientes.id}/contato/${id}`} className="btn btn-info">
+          
+     
           Editar
         </Link>
       </div>

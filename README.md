@@ -2,21 +2,18 @@
 
 Este Projeto com tela de login e Listar Repositorio onde é possivel listar, visualizar, criar, editar, excluir repositorio .
 ## Front-End
-![Video_login](https://github.com/JacquelineCasali/Api-Login-Node-express-Mysql/assets/103325619/f2d88280-d76e-4d72-b26d-033e82c882a1)
 
-## Back-End
-![Video_apilogin](https://github.com/JacquelineCasali/Api-Login-Node-express-Mysql/assets/103325619/1c134f0c-ca3e-4c21-b75c-57144e820d9e)
 
 
 ## Repositorio do Projeto
 
-https://github.com/JacquelineCasali/Api-Login-Node-express-Mysql.git
+git remote add origin https://github.com/JacquelineCasali/Sistema-de-Cadastro-node.js-mysql-e-react.git
 
 ## Instalação
 
 ## FRONTEND
 
-1. `cd login`
+1. `cd frontend`
 2. `npm install`
 3. `npm start`
 
@@ -39,7 +36,7 @@ https://github.com/JacquelineCasali/Api-Login-Node-express-Mysql.git
 
 ## FRONTEND
 - `React.js`
-- `styled-components`
+- `axios`
 
 ## BackEnd
 
@@ -52,7 +49,7 @@ https://github.com/JacquelineCasali/Api-Login-Node-express-Mysql.git
 
 Para rodar o projeto completo é necessario rodar o front e o back-end no terminal
 Abrir o endereço no navegador para acessar a página inicial
-### http://localhost:3000
+
 
 
 Criar banco de dados

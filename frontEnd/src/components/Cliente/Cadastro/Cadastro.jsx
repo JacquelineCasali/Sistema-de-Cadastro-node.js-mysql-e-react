@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import axios from "axios";
+
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async"; // titulo da pagina
 import "./Cadastro.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { api } from "../../../db/axios";
+import axios from "axios"
+// import { createUsuario } from "../../../services/api";
+
 
 
 function Cadastro() {
@@ -27,9 +29,9 @@ function Cadastro() {
     confirmPassword:""
 
   });
- 
-
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
+
   // validação da senha
   const handleValidation = () => {
     const { name, email, telefone,password,confirmPassword } = values;
@@ -60,18 +62,40 @@ function Cadastro() {
 
   const handleSubmit = async (e) => {
    
-     e.preventDefault();
+   
 
-    if (handleValidation()) {
-      axios
-        .post(api+ "/cliente", values)
+     try {
+      e.preventDefault();
+      if (handleValidation()) {
+           axios
+        .post("http://localhost:3001/user", values)
         .then((res) => {
           console.log(res);
           // navigate("/login");
-          navigate("/");
+          navigate("/login");
         })
-        .catch((err) => console.log(err));
+      
+     
+    }} catch (err) {
+      console.error(err);
+      if (err.response) {
+        setMessage(err.response.data.message);
+      }
     }
+
+
+
+
+    // if (handleValidation()) {
+    //   axios
+    //     .post(api+ "/user", values)
+    //     .then((res) => {
+    //       console.log(res);
+    //       // navigate("/login");
+    //       navigate("/");
+    //     })
+    //     .catch((err) => console.log(err));
+    // }
    
    
    
@@ -84,7 +108,7 @@ function Cadastro() {
       </HelmetProvider>
 
 
-
+      {message ? <h1>{message}</h1> : ""}
       <div className="titulo">Sitema de Contatos</div>
       <form onSubmit={handleSubmit} className="form">
 
@@ -147,7 +171,7 @@ function Cadastro() {
 
 </div>
       </form>
-      {/* <ToastContainer toastStyle={{ backgroundColor: "crimson" }} /> */}
+      <ToastContainer toastStyle={{ backgroundColor: "crimson" }} />
     </section>
   );
 }

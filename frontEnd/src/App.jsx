@@ -1,10 +1,23 @@
 import Routes from "./Routes/Routes"
 
-export const REACT_APP_GOOGLE_API_KEY= "AIzaSyAoyKb-HYZnsvRtabAzmZxOQBq34qptkwo"
+// import Dark from "./components/dark/dark";
+
 
 
 function App() {
-  return <Routes />;
+ 
+ 
+  return(
+
+
+<Routes />
+
+
+  )
+
+
+  
 }
+
 
 export default App;
