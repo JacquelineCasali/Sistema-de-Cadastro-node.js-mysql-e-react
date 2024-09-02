@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
 
-      this.belongsToMany(models.Repositorios,{
+      this.belongsToMany(models.Contatos,{
         foreignKey:'userId',
-        through:'Users_Repositorios',
-           as:'repositorio',
+        through:'Users_Contatos',
+           as:'contato',
       onUpdate:'CASCADE',
       onDelete:'CASCADE'})
 
@@ -40,6 +40,8 @@ module.exports = (sequelize, DataTypes) => {
   },
     
     
+    
+    
     email: {
       type:DataTypes.STRING,
       allowNull: false,
@@ -63,19 +65,17 @@ module.exports = (sequelize, DataTypes) => {
     }
     } ,
 
-
     telefone: {
       type: DataTypes.STRING,
+     
+      unique:true,
       allowNull: false,
-      
       validate:{
         notEmpty:{
           msg:"Esse campo precissa ser um telefone valido"
         },
-            }, 
-      unique:true, 
+      }  
   },
-
 
   }, {
     sequelize,

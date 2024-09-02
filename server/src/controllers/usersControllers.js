@@ -1,5 +1,5 @@
 const db = require("../db/models");
-const bcrypt = require("../services/auth");
+const bcrypt = require("../middlewares/bcrypt");
 
 const usersControllers = {
   //criar listar imagem
@@ -19,7 +19,7 @@ const usersControllers = {
   async criar(req, res) {
     //verificando se o email já esta cadastrado
     try {
-      const {name, email, password,telefone  } = req.body;
+      const {name, email, password,telefone } = req.body;
       const user = await db.Users.findOne({ where: { email },where:{name} });
       if (user) {
         return res
@@ -52,21 +52,22 @@ const usersControllers = {
   async ler(req, res) {
     try {
       const { id } = req.params;
-      const users = await db.Users.findOne({ where: { id } });
+        const users = await db.Users.findOne({ where: { id } });
       // caso nao encotre o usuario
       if (!users) {
         return res.status(404).json({ message: "Usuario não encontrado" });
       }
-      return res.status(200).json(users);
+    return res.status(200).json(users);
+      
     } catch (err) {
-      return res.status(400).send({ err: err });
+      return res.status(401).send({ err: err });
     }
   },
 
   async update(req, res) {
     try {
       const { id } = req.params;
-      const { name, email, password,telefone } = req.body;
+      const { name,email, password,telefone } = req.body;
       const users = await db.Users.findOne({ where: { id } });
       if (!users) {
         return res.status(404).json({
@@ -74,7 +75,7 @@ const usersControllers = {
         });
       } else {
         await db.Users.update(
-          {name, email, telefone, password: bcrypt.generateHash(password) },
+          { name,email, password: bcrypt.generateHash(password),telefone },
           { where: { id } }
         );
         return res.status(200).json({
@@ -83,8 +84,9 @@ const usersControllers = {
       }
     } catch (err) {
       // return res.status(400).send(err);
-      return res.status(500).json({ message: `Email ou nome já cadastrado`, err: err });
+      return res.status(500).json({ message: `Email já cadastrado`, err: err });
     }
+    
   },
 
   async delete(req, res) {

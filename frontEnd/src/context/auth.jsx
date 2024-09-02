@@ -10,6 +10,7 @@ export const AuthContext= createContext()
 //children que vc envolveu com o componente
 export const AuthProvider= ({children})=>{
   const [user,setUser]=useState(null)
+
   //carregamento do login 
   const [loading,setLoading]=useState(true)
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ export const AuthProvider= ({children})=>{
 api.defaults.headers['x-access-token'] =`${token}`
 
  }
+
  setLoading(false)
  
 },[])
@@ -41,7 +43,7 @@ api.defaults.headers['x-access-token'] =`${response.data.token}`
 
 
 setUser(response.data.users);
-navigate("/");
+navigate(`/${user.id}/contato`);
 // userAuth 
 console.log('login',response.data)
 
@@ -55,7 +57,7 @@ api.defaults.headers['x-access-token'] =null
 //  api.defaults.headers.Authorization=null
 
   setUser(null)
-  navigate("/login");
+  navigate("/");
 }
 
 

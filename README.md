@@ -1,6 +1,6 @@
 # Projeto desenvolvido com
 
-Este Projeto com tela de login e Listar Repositorio onde é possivel listar, visualizar, criar, editar, excluir repositorio .
+Este Projeto com tela de login e Listar Contatos onde é possivel listar, visualizar, criar, editar, excluir Usuarios e contatos .
 ## Front-End
 
 

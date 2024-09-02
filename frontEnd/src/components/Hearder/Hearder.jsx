@@ -2,7 +2,6 @@ import React, { useState ,useContext} from "react";
 import styles from "./Hearder.module.css";
 import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-
 import { AuthContext } from "../../context/auth";
 
 function Hearder() {
@@ -21,20 +20,23 @@ function Hearder() {
     };
   return (
     <header className={styles.header}>
-        <span>Sistema de Repositorio</span>
+        <span>Sistema de Contato</span>
       
 
         <nav className={`${styles.menuSandwich} ${menu ? styles.show : ""} `} onClick={click} >
-        <Link  className={styles.a} to="/">Home</Link>
-    
-
-
-    {(user?.email)?
-     <Link className={styles.a} to={`/edit/${user?.id}`}>
-     Editar Usuario</Link>:
+       
+        {(user?.email)?
+     <Link className={styles.a} to={`/${user?.id}`}>
+     Usuário</Link>:
 <Link className={styles.a} to={`/cadastro`}>
           Cadastro Usuario</Link>
           }
+       
+        <Link  className={styles.a} to={`/${user?.id}/contato`}>Contato</Link>
+    
+
+
+
 {/* <Link className={styles.a} to={`/login`}>
          
          
@@ -59,7 +61,7 @@ function Hearder() {
    <button className={styles.btn} onClick={handleLogout}>Sair</button>
 :
 <button className={styles.btn}>
-  <Link className="link" to='/login'>
+  <Link className="link" to='/'>
   Login </Link>
   </button>
  

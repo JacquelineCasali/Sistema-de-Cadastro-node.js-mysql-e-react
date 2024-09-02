@@ -1,0 +1,67 @@
+.lado-direitos{
+  width: 100%;
+  float: none;
+margin-left: 20px;
+display: flex;
+flex-direction: column;
+
+}
+ 
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 20px;
+}
+.card-ler{
+  display: flex;
+
+    justify-content: center;
+}
+.tes{
+  font-weight: bold;
+  margin: 0 10px 10px 0 ;
+
+}
+
+.card-item{
+  display: flex;
+  font-size: 14px;
+}
+p{
+  margin-bottom: 5px;
+}
+
+
+.link{
+  display: flex;
+  margin-top: 20px;
+
+}
+
+
+.btn-editar {
+    background-color: #0275d8;
+    color: white;
+    font-weight: bold;
+    /* position: fixed; */
+    bottom: 100px;
+    /* right: 24px; */
+    transition: all 0.1s linear 0.1s;
+    /* width: 40%; */
+    padding: 10px 15px;
+    border-radius: 20px;
+  font-size: 18px;
+  /* display: flex; */
+  /* margin-left: 600px; */
+}
+  
+.button:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 7px 0px;
+    transform: scale(1.1);
+}

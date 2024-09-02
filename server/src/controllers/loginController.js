@@ -1,14 +1,15 @@
 const db = require("../db/models");
-const bcrypt = require("../services/auth");
+const bcrypt = require("../middlewares/bcrypt");
 const jwt= require('jsonwebtoken')
 
-//const SECRET='123'
 const loginController = {
 
   
 
   //cadastrar
   async login(req, res) {
+   
+   
     const { email, password } = req.body;
     const users = await db.Users.findOne({ where: { email } });
 
@@ -23,8 +24,9 @@ const loginController = {
     //resgatando o id do usuario
     const{id}=users;
     //expiresIn:300 expira em 5 minutos
-  // const token= jwt.sign({id},authConfig.secret,{expiresIn:"7d"})
-  const token= jwt.sign({id},process.env.SECRET,{expiresIn:"1h"})
+  const token= jwt.sign({id},
+    
+    process.env.APP_SECRET,{expiresIn:"1d"})
 
   res.cookie('token',token)
 
@@ -32,7 +34,7 @@ const loginController = {
       auth:true,
       // message: 'logado com sucesso',
       users:{
-         id,email
+        id, email
        },
       token,
       message:'Logado com sucesso'
@@ -42,7 +44,32 @@ const loginController = {
   
   },
 
+  //cadastrar
+  async senha(req, res) {
+   
+   
+    const { email, password } = req.body;
+    const users = await db.Users.findOne({ where: { email } });
 
+    if (!users) {
+      return res.status(422).json({message: `Email ${email} não encontrado` });
+    }else{
+      await db.Users.update(
+        { password: bcrypt.generateHash(password) },
+        { where: { email } }
+      )
+    }
+    const{id}=users;
+     return res.json({
+       users:{
+        id, email
+       },
+       message:'Atualizada com sucesso'
+     }
+      
+     );
+  
+  },
 
 };
 module.exports = loginController;

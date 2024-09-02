@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const api = axios.create({ baseURL:"http://localhost:3001" });
+export const api = axios.create({ baseURL:"http://localhost:3002" });
 
 //metodo que cria a sessao do login
 
@@ -9,57 +9,46 @@ export const createSession = async (email, password) => {
   return api.post(url, { email: email, password: password });
 };
 
-export const createUsuario = async (name, email, password, telefone) => {
+export const createUsuario = async (name,email, password,telefone) => {
   const url = `/user`;
-  return api.post(url, { name:name,email: email, password: password,telefone:telefone });
+  return api.post(url, {name:name, email: email, password: password,telefone:telefone });
 };
-
-export const editarUsuario = async (id,name,email, password,telefone) => {
+export const createSenha = async (email, password) => {
+  const url = `/senha`;
+  return api.post(url, {email: email, password: password});
+};
+export const editarUsuario = async (id,name,email, telefone,password) => {
   const url = `/user/${id}`;
-  return api.put(url, { name:name,email: email, password: password,telefone:telefone  });
+  return api.patch(url,{ name:name,email: email,password: password, telefone:telefone, });
 };
-export const getUsuario = async (id) => {
+export const getUsuario = async (id,headers) => {
   let url = `/user/${id}`;
 
-
   console.log("query", url);
-  return api.get(url);
+  return api.get(url,headers);
 };
 
 
-export const getrepository = async (userId, query) => {
-  let url = `/user/${userId}/repositorio/`;
-  //let url=`/repo/`
+export const deleteUsuario = async (url) => {
 
-  if (query !== "") {
-    url += `?url=${query}`;
-  }
+ var mensagem;
+ 
+     // Fazer a requisição para o servidor utilizando axios, indicando o método da requisição e o endereço
+     await axios.delete(url)
+     .then((response) => { // Acessa o then quando a API retornar status 200
+         mensagem = response.data.mensagem;
+     }).catch((err) => { // Acessa o catch quando a API retornar erro
+         // Atribuir a mensagem no state message
+         //console.log(err.response.data.mensagem);
+         if (err.response) {
+             mensagem = err.response.data.mensagem;
+         } else {
+             mensagem = "Erro: Tente novamente mais tarde ou entre contato com ...!";
+         }
+     });
 
-  console.log("query", url);
-  return api.get(url);
-};
-// criar
-// export const createRepository = async (userId, repositorioUrl) => {
-  
-//   const url = `/user/${userId}/repositorio`;
-//   return api.post(url, { name: repositorioName, url: repositorioUrl });
-// };
-
-
-export const createRepository = async (nome, emails,  telefones,userId) => {
-  const url = `/user/${userId}/repositorio`;
-  return api.post(url, { nome:nome,emails: emails, telefones:telefones });
+ // Retornar a mensagem de sucesso ou erro
+ return mensagem;
 };
 
-
-
-//deletar
-
-export const deleteRepository = async (userId, id) => {
-  const url = `/user/${userId}/repositorio/${id}`;
-  return api.delete(url);
-};
-//extrarir o nome dentro da url
-//regex
-//https://ihateregex.io/expr/url/
 

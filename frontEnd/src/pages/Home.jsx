@@ -1,11 +1,10 @@
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async"; // titulo da pagina
+import Hearder from "../components/Hearder/Hearder";
+import Card from "../components/Contato/Card";
 
 
-import Card from "../components/Card/Card";
-
-
-export default function Home() {
+export default function Home({onLogout}) {
 
   return (
   
@@ -15,7 +14,7 @@ export default function Home() {
         <Helmet title="Sistema de Repositorios" />
       </HelmetProvider>
 
-{/* <Hearder/> */}
+      <Hearder onClick={onLogout} />
     <Card/>
 
 

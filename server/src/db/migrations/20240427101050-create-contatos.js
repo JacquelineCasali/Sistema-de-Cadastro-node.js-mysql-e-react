@@ -2,32 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Contatos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-     
-    
-      name: {
+
+   
+        
+      nome: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique:true,
+        //unique:true,
+       allowNull: false,
         validate:{
-          notEmpty:{
+          notEmpty: {
             msg:"Esse campo não pode ser vazio"
           },
-        }  
-    },
-
-
-    
-      email: {
+        }
+      },
+      emails: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique:true,
+        // unique:true,
         validate:{
           // nao permite campo vazio
           isEmail:{
@@ -35,26 +33,17 @@ module.exports = {
            }
          }
       },
-      password: {
+  
+      telefones: {
         type: Sequelize.STRING,
+        // unique:true,
         allowNull: false,
         validate:{
           notEmpty:{
-            msg:"Esse campo não pode ser vazio"
+            msg:"Esse campo precissa ser um telefone valido"
           },
         }  
     },
-    telefone: {
-      type: Sequelize.STRING,
-     
-      unique:true,
-      allowNull: false,
-      validate:{
-        notEmpty:{
-          msg:"Esse campo precissa ser um telefone valido"
-        },
-      }  
-  },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -65,7 +54,9 @@ module.exports = {
       }
     });
   },
+
+  
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Contatos');
   }
 };

@@ -3,29 +3,36 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home";
 import Error from "../pages/Error/Error";
 import Loginelogaut from "../pages/Login";
-
-
-// import { Container, Loading } from "../styles/styles";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { AuthProvider, AuthContext } from "../context/auth";
 import { Navigate } from "react-router-dom";
 
-import Cadastro from "../components/Cliente/Cadastro/Cadastro";
-import Ler from "../components/Cliente/Ler/Ler";
-import Editar from "../components/Cliente/Editar/Editar"
-import Detalhe from "../pages/Delalhe";
-import EditarContato from "../components/Cliente/Editar/EditarContato";
-import CadastroContato from "../components/Repo";
+import Loading from "../components/Loading/Loading"
+import CadastroUsuario from "../components/usuario/CadastroUsuario";
+import EditarUsuario from "../components/usuario/EditarUsuario";
+import Ler from "../components/usuario/Ler";
+import CadastroContato from "../components/Contato/CadastroContato";
+import LerContato from "../components/Contato/Ler";
+import EditarContato from "../components/Contato/EditarContato";
+
+import EditarSenha from "../components/usuario/EditarSenha";
+
 
 
 const AppRoutes = () => {
+
+ 
   //rotas privadas
   const Private = ({ children }) => {
     const { authenticated, loading } = useContext(AuthContext);
 
+    if (loading) {
+      return <Loading/>;
+    }
 
     //se nao tiver autenticado navega ate o login
     if (!authenticated) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/" />;
     }
     return children;
   };
@@ -33,64 +40,65 @@ const AppRoutes = () => {
   return (
     <Router>
       <AuthProvider>
-        {/* <Hearder onClick={onLogout} /> */}
+       
 
-   
+    
           <Routes>
-          <Route exact path="/ler" element={<Ler />} />
-      <Route exact path="/cadastro" element={<Cadastro />} />
-      <Route exact path="/login" element={<Loginelogaut />} />
           
-            <Route
+          <Route exact path="/" element={<Loginelogaut />} />
+          <Route exact path="/senha" element={
+            
+ <EditarSenha/>
+    
+           } />
+           
+            <Route exact path="/cadastro" element={<CadastroUsuario />} />
+            <Route exact path="/edit/:id" element={
+               <Private>
+ <EditarUsuario/>
+               </Private>
+           } />
+                       <Route exact path="/:id" element={
+              <Private>
+ <Ler/>
+              </Private>
+           } />
+  <Route
               exact
-              path="/"
+              path="/:id/contato"
               element={
                 <Private>
                   <Home />
                 </Private>
               }
             />
-   <Route
+<Route
               exact
-              path="/:id/ler"
+              path="/:id/cadastrar/contato"
               element={
-                <Private>
-                  <Detalhe />
-                </Private>
-              }
-            />
-
-            <Route
-              exact
-              path="/cadastrocontato"
-              element={
-                <Private>
+                <Private >
                   <CadastroContato />
                 </Private>
               }
             />
-            <Route exact path="/login" element={<Loginelogaut />} />
-            {/* <Route exact path="/cadastro" element={<CadastroLogin />} /> */}
-            <Route exact path="/edit/:id" element={
+<Route
+              exact
+              path="/:id/contato/:id"
+              element={
+                <Private >
+                  <LerContato />
+                </Private>
+              }
+            />
+
+<Route exact path="/:id/edit/:id" element={
               <Private>
- <Editar />
+ <EditarContato/>
               </Private>
-
-
-
-
-
            } />
 
-
-   <Route exact path="/edit/:id/contato/:id" element={
-     <Private>
-    
-    <EditarContato />
-    </Private>} />
             <Route path="*" element={<Error />} />
           </Routes>
-  
       </AuthProvider>
     </Router>
   );

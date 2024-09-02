@@ -10,25 +10,6 @@
  }
 
 
- .form-login{
-  padding: 12px;
-  margin-top: 16px;
-  color:rgb(17, 24, 39) ;
-  background-color:rgb(243 244 246) ;
-  width: 330px;
-  outline-offset: 2px;
-  outline: 3px solid transparent;
-  border-radius: 10px; 
-  opacity: 0.7;
-  
-  }
-
-
-  .form-login:focus{
-    border-color:#00bfff;
-  }
-
-
   .btn-login{
    text-align: center;
    text-transform: uppercase;
@@ -37,7 +18,7 @@
    height: 50px;
   
    border-radius: 20px;
-   margin-top: 26px;
+   margin-top: 16px;
    color: #fff;
    background-color: rgb(20 83 45);
    cursor: pointer;
@@ -57,9 +38,68 @@
    .btn-login:active{
      background: black;
    }
-   
+   .input-senha{
+  position: relative;
+  display: flex;
+  align-items: center;
+   }
+ .icon  {
+
+  margin:20px 0px 0px -40px;
+
+  display: inline;
  
+ }
+ .icon-button{
+all:unset;
+cursor: pointer;
+outline: 0;
+display: flex;
+align-items: center;
+color:rgb(17, 24, 39) ;
+/* width: 808px; */
+outline-offset: 2px;
+outline: 2px solid transparent;
+margin:20px 0px 0px -40px;
+opacity: 0.7;
+
+ }
+
+ .text-login{
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+margin-top: 16px;
+text-decoration-line:underline ;
+font-weight: 600;
+color:  rgb(20 83 45);
+line-height: 24px;
+font-size: 16px;
+}
+
+
+
+.text-login:hover ,.text-esqueceu:hover {
+  color: rgb(22 163 74);
+  /* transition: 0.5s; */
+}
  
+
+
+
+ .text-esqueceu{
+  justify-content: flex-end;
+  display: flex;
+  margin-top: 16px;
+  text-decoration-line: underline;
+  font-weight: 600;
+  color: rgb(20 83 45);
+  line-height: 24px;
+  font-size: 16px;
+cursor: pointer;
+ }
+
 
   
    /* responsividade */

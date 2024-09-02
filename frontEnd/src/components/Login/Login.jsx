@@ -1,17 +1,28 @@
-import React, { useState,useContext } from "react";
+
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Helmet, HelmetProvider } from "react-helmet-async"; // titulo da pagina
 import { AuthContext } from "../../context/auth";
-import "./login.css"
 
 
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import "./Login.css"
+import {  FaUser } from "react-icons/fa";
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 
-function Login() {
 
+const Login = () => {
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const [message, setMessage] = useState("");
+  const [isShow, setIsShow]= useState(false);
+
+
+const handlePassword= ()=>setIsShow(!isShow)
+
+
+
 
   const handlLogin = async (e) => {
     try {
@@ -26,46 +37,77 @@ function Login() {
     }
   };
 
-
-
   return (
+    <>
+    
+    
+    
+    
     <section className="body">
       <HelmetProvider>
-        <Helmet title="Cadastro Cliente" />
+        <Helmet title="Login" />
       </HelmetProvider>
-
-
 
       <div className="titulo">Sitema de Contatos</div>
    
-      {message ? <h1>{message}</h1> : ""}
       <form onSubmit={handlLogin} className="form">
 
     
 
 <div className="formulario-login">
-<p className="titulo-p">Login</p>
+{message ? <h1>{message}</h1> : ""}
 
+<p className="titulo-p">Login</p>
+<div className="input-senha">
         <input
-          className="form-login"
+          className="form-control"
           type="email"
           placeholder="Digite o Email"
         
-          autofocus
+       
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-     
-<input
-          className="form-login"
-          type="password"
+         <FaUser className="icon" />
+         </div>
+     <div className="input-senha" >
+
+
+
+     <input
+         className="form-control"
+          type={isShow? "text": "password"}
           placeholder="Digite sua senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         required
-        />
+       
+       
+       />
+       
+  <button onClick={handlePassword} type="button" className="icon-button"> 
+  
+  
+  
+  {/* visualizar senha */}
+  {isShow ? (<MdVisibilityOff   size={20} />):( <MdVisibility size={20} />)
+           }
+  </button>
+  
+  </div>
+        
 
+          
+  <Link className="text-esqueceu" to={"/senha"}>
+  Esqueceu sua senha?
+</Link> 
+
+             
+              
+          
+          
+    
 
 
 
@@ -79,7 +121,10 @@ function Login() {
 </div>
       </form>
 
-    </section>
+
+           </section>
+    </>
   );
-}
+};
+
 export default Login;
