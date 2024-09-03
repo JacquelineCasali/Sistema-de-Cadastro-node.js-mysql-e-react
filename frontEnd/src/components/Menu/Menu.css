@@ -10,6 +10,20 @@
     color: blue;
 
   } 
+
+  .dados{
+    background-color: #f5f5f5;
+    /* width: 90%; */
+    float: none;
+      list-style: none;
+      border: 2px solid #e5e5e5;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      text-indent: 15px;
+padding: 5px;
+margin-left: 15px;
+}
+
   .data{
       padding-left: 25px;
       font-size: 16px;

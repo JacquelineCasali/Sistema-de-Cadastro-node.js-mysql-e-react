@@ -9,19 +9,22 @@ import { api } from '../../services/api';
 import "./Card.css"
 import Footer from '../Footer/Footer';
 import Modal from '../Modal/Modal';
+import Paginacao from '../Paginacao/Paginacao';
+import Busca from '../Search/Search';
+import Search from '../Search/Search';
+import PaginacaoSelect from '../Paginacao/PaginacaoSelect';
 
 
 export default function Card() {
   const { user } = useContext(AuthContext);
-  const [repositores, setRepositores] = useState([]);  
-
+  const [contatos, setContatos] = useState([]);  
   const [message, setMessage] = useState("");
-
-
   const [openModal, setOpenModal] = useState(false);
   const [busca, setBusca] = useState("");
   const navigate = useNavigate();
-
+  // item por pagina 
+  const [itensPage, setItensPage] = useState(3);
+  const [pageInicial, setPageInicial] = useState(0);
   // Função que abre a modal
   function abrirModal() {
     setOpenModal(true);
@@ -33,6 +36,12 @@ export default function Card() {
   }
 
 
+
+  // calular numero de pagina
+const pages=Math.ceil(contatos.length/itensPage);
+const startIndex=pageInicial*itensPage;
+const endIndex=startIndex+itensPage;
+const currentItems=contatos.slice(startIndex,endIndex)
   const headers={
     'headers':{
       'x-access-token':api.defaults.headers['x-access-token'],
@@ -46,7 +55,8 @@ export default function Card() {
         api
         .get(`/user/${user?.id}/contato`,headers
         ).then((response)=>{
-         setRepositores(response.data.contato);
+          setContatos(response.data.contato);
+         
          console.log(response.data);
          setMessage(response.data.message);
   })} catch (err) {         
@@ -58,7 +68,7 @@ export default function Card() {
   //corventendo para miniscula
   const searchLowerCase = busca.toLowerCase();
   console.log(busca);
-  const nomes = repositores.filter(
+  const nomes = currentItems.filter(
     (cliente) =>
       cliente.nome.toLowerCase().includes(searchLowerCase) 
   
@@ -82,7 +92,10 @@ export default function Card() {
         .catch((err) => console.log(err));
     };
 
-  
+  // volta para a pagina inicial
+  useEffect(()=>{
+    setPageInicial(0)
+  },[itensPage])
   return (
     <>
 <HelmetProvider>
@@ -93,39 +106,36 @@ export default function Card() {
        <Menu
        />
 <main className="lado-lista">
-      <div className="busca">
-        {/* filtro */}
-        <input
-          type="texts"
-         value={busca}
-         onChange={(e) => setBusca(e.target.value)}
-          className="pesquisa"
-          placeholder="Pesquise aqui"
-        />
+  <Search
+  busca={busca}
+  setBusca={setBusca}
+    />
 
-        <div className="lupa">
-          <BsSearch size={30} />
-        </div>
-
-        </div>
- 
         <Link className="button" to={`/${user?.id}/cadastrar/contato`}>Cadastro
         
         </Link>
         <div className="clientes" >
      
       <h3 >Contatos</h3> 
-          
-     </div>
 
    
+ 
+     </div>
+
+     <PaginacaoSelect
+ itensPage={itensPage}
+ setItensPage={setItensPage}
+ 
+ />
 
  
      {nomes.length>0?(
  
   <div className="card-grid">
   {message ? <h1>{message}</h1> : ""}
-        {nomes?.map((menbro) => (
+
+
+      {  nomes?.map((menbro) => (
         // <Link  to={`/${menbro.id}`}>
        <div className="cards" key={menbro.id}>
           
@@ -218,11 +228,21 @@ className="btn btn-danger mt-3 ml-3">
           
           // </Link>
         ))}
+
       </div>
      ):(
       <p className='text-mensagem'>Nenhum contato Cadastrado. Clique em cadastrar</p>
      )}
-  
+<div>
+ <Paginacao
+ setPageInicial={setPageInicial}
+ pages={pages}
+ pageInicial={pageInicial}
+ 
+ />
+
+</div>
+
     </main>
 
     </section>

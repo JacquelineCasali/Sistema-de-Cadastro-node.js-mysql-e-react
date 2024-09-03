@@ -1,0 +1,31 @@
+.pagina{
+  margin: 5px;  
+background-color: white;
+border: none;
+border-bottom:solid 2px black;
+font-size: large;
+font-weight: bold;
+}
+.pagina:hover{
+    border-bottom:solid 2px red;
+    color: red;
+
+}
+.itenspag{
+    display: flex;
+    margin-left: 750px;
+    /* justify-content: flex-end; */
+}
+.itenspags{
+margin-right: 10px;
+
+    display: flex;
+ font-size: medium;
+    align-items: center;
+    font-weight: bold;
+}
+select{
+    padding: 10px;
+    border-radius: 20px;
+    border: solid 1px black;
+}
