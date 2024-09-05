@@ -5,6 +5,7 @@ export default function Paginacao({setPageInicial,pageInicial,pages}) {
     <div>
       {Array.from(Array(pages),(menbro,index)=>{
       return <button 
+      key={index}
       style={index===pageInicial?{color:"red",borderBottom:"blue"}:null}
       className='pagina'
       value={index} onClick={(e)=>setPageInicial(Number(e.target.value))}>{index+1}

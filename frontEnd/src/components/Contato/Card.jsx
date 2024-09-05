@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
 import Menu from '../Menu/Menu'
-import { BsSearch } from "react-icons/bs";
+
 import * as Icon from "react-bootstrap-icons";
 import { AuthContext } from '../../context/auth';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,11 +10,13 @@ import "./Card.css"
 import Footer from '../Footer/Footer';
 import Modal from '../Modal/Modal';
 import Paginacao from '../Paginacao/Paginacao';
-import Busca from '../Search/Search';
+
 import Search from '../Search/Search';
 import PaginacaoSelect from '../Paginacao/PaginacaoSelect';
 
-
+import { IoMdAdd } from "react-icons/io";
+import { FaRegFilePdf } from 'react-icons/fa6';
+import ClientesPDF from '../../Relatorio/Clientes/ClientesPDF';
 export default function Card() {
   const { user } = useContext(AuthContext);
   const [contatos, setContatos] = useState([]);  
@@ -111,9 +113,33 @@ const currentItems=contatos.slice(startIndex,endIndex)
   setBusca={setBusca}
     />
 
-        <Link className="button" to={`/${user?.id}/cadastrar/contato`}>Cadastro
-        
-        </Link>
+<div className='pdfcadastro'>
+
+<button onClick={(e)=>ClientesPDF(contatos)}
+className="pdf"
+
+>
+<FaRegFilePdf
+
+  size={25}
+             cursor="pointer"
+/>Gerar PDF
+</button>
+
+
+
+        <Link 
+        className="button" 
+        to={`/${user?.id}/cadastrar/contato`}>
+                <IoMdAdd
+              size={25}
+             cursor="pointer"
+        />
+        Cadastro
+                </Link>
+
+                </div>
+
         <div className="clientes" >
      
       <h3 >Contatos</h3> 
